@@ -42,6 +42,7 @@ const aiRecommendationsActionSchema = z.object({
     lastMaintenanceDate: z.string(),
     purchaseDate: z.string(),
     maintenanceHistory: z.string(),
+    location: z.string().optional(),
 });
 
 export async function runAiRecommendations(input: MaintenanceRecommendationsInput) {

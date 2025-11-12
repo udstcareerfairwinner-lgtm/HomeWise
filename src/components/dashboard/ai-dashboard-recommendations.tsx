@@ -28,6 +28,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 
 type Recommendation = {
   costSavingTips: string;
@@ -40,6 +42,7 @@ export function AiDashboardRecommendations() {
   const [isLoading, setIsLoading] = useState(false);
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
   const [selectedMachineId, setSelectedMachineId] = useState<string | null>(null);
+  const [location, setLocation] = useState('');
   const { toast } = useToast();
 
   const handleRecommend = async () => {
@@ -65,6 +68,7 @@ export function AiDashboardRecommendations() {
         lastMaintenanceDate: machine.lastMaintenance,
         purchaseDate: machine.purchaseDate,
         maintenanceHistory: machine.maintenanceHistory.map(h => `${h.date}: ${h.task} ($${h.cost})`).join(', ') || 'None',
+        location,
       };
       const result = await runAiRecommendations(input);
       setRecommendation(result);
@@ -106,6 +110,17 @@ export function AiDashboardRecommendations() {
             ))}
           </SelectContent>
         </Select>
+        
+        <div className="space-y-2">
+            <Label htmlFor="dashboard-location">Your Location</Label>
+            <Input 
+                id="dashboard-location"
+                placeholder="e.g., Mountain View, CA"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                disabled={!selectedMachineId}
+            />
+        </div>
 
         <div className="min-h-[150px]">
           {isLoading ? (
@@ -133,7 +148,7 @@ export function AiDashboardRecommendations() {
               </Accordion>
           ) : (
             <div className="flex items-center justify-center h-full text-center text-sm text-muted-foreground">
-              Select a machine and click below to get AI recommendations.
+              Select a machine, enter a location, and click below.
             </div>
           )}
         </div>
