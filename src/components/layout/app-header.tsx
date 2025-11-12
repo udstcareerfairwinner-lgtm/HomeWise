@@ -13,14 +13,14 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
-import { Home, PanelLeft, Settings, Wrench, History, BookText, Bell } from 'lucide-react';
+import { Home, PanelLeft, Settings, Wrench, History, BookText, Bell, AlertCircle } from 'lucide-react';
 
 const mobileMenuItems = [
     { href: '/', label: 'Dashboard', icon: Home },
     { href: '/machines', label: 'Machines', icon: Wrench },
     { href: '/history', label: 'History', icon: History },
     { href: '/reminders', label: 'Reminders', icon: Bell },
-    { href: '/notifications', label: 'Notifications', icon: Bell },
+    { href: '/notifications', label: 'Notifications', icon: AlertCircle },
     { href: '/logs', label: 'Logs', icon: BookText },
     { href: '/settings', label: 'Settings', icon: Settings },
   ];
@@ -74,21 +74,20 @@ export function AppHeader() {
               <Link href="/">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {breadcrumbItems.length > 0 && <BreadcrumbSeparator />}
-          {breadcrumbItems.map(({ href, label, isLast }) => (
-              <Fragment key={href}>
-                <BreadcrumbItem>
-                  {isLast ? (
-                    <BreadcrumbPage>{label}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink asChild>
-                      <Link href={href}>{label}</Link>
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-                {!isLast && <BreadcrumbSeparator />}
-              </Fragment>
-            ))}
+          {breadcrumbItems.map(({ href, label, isLast }, index) => (
+            <Fragment key={href}>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>{label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink asChild>
+                    <Link href={href}>{label}</Link>
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </Fragment>
+          ))}
         </BreadcrumbList>
       </Breadcrumb>
     </header>
