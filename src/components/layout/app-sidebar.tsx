@@ -8,14 +8,12 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar';
 import {
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
-} from '@/components/ui/sidebar';
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
 import {
   LayoutDashboard,
   Wrench,
@@ -23,7 +21,9 @@ import {
   Settings,
   CircleHelp,
   LogOut,
+  Home,
 } from 'lucide-react';
+import { Button } from '../ui/button';
 
 const menuItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -36,66 +36,65 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <>
-      <SidebarHeader>
-        <div className="flex items-center gap-2">
-            <Wrench className="w-8 h-8 text-primary" />
-            <div className="flex flex-col">
-                <h2 className="text-lg font-semibold tracking-tighter text-sidebar-foreground">
-                    HomeCare AI
-                </h2>
-                <p className="text-xs text-sidebar-foreground/70">Smart Maintenance</p>
-            </div>
-        </div>
-      </SidebarHeader>
-
-      <SidebarContent>
-        <SidebarMenu>
-          {menuItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <Link href={item.href}>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  tooltip={item.label}
-                >
-                  <item.icon />
-                  <span>{item.label}</span>
-                </SidebarMenuButton>
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+        <TooltipProvider>
+      <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+        <Link
+          href="#"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+        >
+          <Wrench className="h-4 w-4 transition-all group-hover:scale-110" />
+          <span className="sr-only">HomeCare AI</span>
+        </Link>
+        {menuItems.map((item) => (
+          <Tooltip key={item.href}>
+            <TooltipTrigger asChild>
+              <Link
+                href={item.href}
+                className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8 ${
+                  pathname === item.href
+                    ? 'bg-accent text-accent-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <item.icon className="h-5 w-5" />
+                <span className="sr-only">{item.label}</span>
               </Link>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarContent>
-
-      <SidebarFooter>
-        <SidebarMenu>
-            <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Help">
-                    <CircleHelp />
-                    <span>Help</span>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Log out">
-                    <LogOut />
-                    <span>Log out</span>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-        </SidebarMenu>
-        <SidebarSeparator />
-        <div className="flex items-center gap-3 p-2">
-          <Avatar className="h-9 w-9">
-            <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="John Doe" />
-            <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium text-sidebar-foreground">John Doe</span>
-            <span className="text-xs text-sidebar-foreground/70">
-              john@example.com
-            </span>
-          </div>
-        </div>
-      </SidebarFooter>
-    </>
+            </TooltipTrigger>
+            <TooltipContent side="right">{item.label}</TooltipContent>
+          </Tooltip>
+        ))}
+      </nav>
+      <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="#"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+            >
+              <CircleHelp className="h-5 w-5" />
+              <span className="sr-only">Help</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="right">Help</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="#"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+            >
+                <Avatar className="h-8 w-8">
+                    <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="John Doe" />
+                    <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+              <span className="sr-only">Account</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="right">Account</TooltipContent>
+        </Tooltip>
+      </nav>
+      </TooltipProvider>
+    </aside>
   );
 }
