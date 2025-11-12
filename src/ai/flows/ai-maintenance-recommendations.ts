@@ -50,6 +50,8 @@ const prompt = ai.definePrompt({
   Purchase Date: {{{purchaseDate}}}
   Maintenance History: {{{maintenanceHistory}}}
 
+  When recommending service providers, please suggest a few options for common locations (e.g., "a local auto shop," "a certified appliance repair service").
+
   Format your response in JSON.
 `,
 });

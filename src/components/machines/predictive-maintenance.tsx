@@ -25,7 +25,7 @@ type Prediction = {
 
 type PredictiveMaintenanceProps = {
   machine: Machine;
-  onPredict: (prediction: Prediction) => void;
+  onPredict?: (prediction: Prediction) => void;
 };
 
 
@@ -56,7 +56,9 @@ export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintena
       };
       const result = await runPredictiveMaintenance(input);
       setPrediction(result);
-      onPredict(result); // Pass the prediction to the parent
+      if (onPredict) {
+        onPredict(result); // Pass the prediction to the parent
+      }
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -121,7 +123,7 @@ export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintena
               Predicting...
             </>
           ) : (
-            'Predict & Set Reminder'
+            onPredict ? 'Predict & Set Reminder' : 'Predict Maintenance'
           )}
         </Button>
       </CardFooter>
