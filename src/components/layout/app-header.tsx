@@ -39,7 +39,9 @@ export function AppHeader() {
                   {isLast ? (
                     <BreadcrumbPage>{label}</BreadcrumbPage>
                   ) : (
-                    <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
+                    <BreadcrumbLink asChild>
+                        <Link href={href}>{label}</Link>
+                    </BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
               </Fragment>

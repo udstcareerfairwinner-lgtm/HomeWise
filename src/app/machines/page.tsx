@@ -94,7 +94,7 @@ export default function MachinesPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem asChild>
                           <Link href={`/machines/${machine.id}`}>View Details</Link>
                         </DropdownMenuItem>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
