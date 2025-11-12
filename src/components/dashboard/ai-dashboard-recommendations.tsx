@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, Sparkles } from 'lucide-react';
+import { Loader2, Sparkles, LocateFixed } from 'lucide-react';
 import { runAiRecommendations } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -40,10 +40,43 @@ type Recommendation = {
 
 export function AiDashboardRecommendations() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLocating, setIsLocating] = useState(false);
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
   const [selectedMachineId, setSelectedMachineId] = useState<string | null>(null);
   const [location, setLocation] = useState('');
   const { toast } = useToast();
+
+  const handleUseCurrentLocation = () => {
+    setIsLocating(true);
+    if (!navigator.geolocation) {
+      toast({
+        variant: 'destructive',
+        title: 'Geolocation Not Supported',
+        description: 'Your browser does not support geolocation.',
+      });
+      setIsLocating(false);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation(`Coordinates: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+        toast({
+          title: 'Location Found',
+          description: 'Your current location has been set.',
+        });
+        setIsLocating(false);
+      },
+      () => {
+        toast({
+          variant: 'destructive',
+          title: 'Unable to Retrieve Location',
+          description: 'Please ensure location services are enabled in your browser.',
+        });
+        setIsLocating(false);
+      }
+    );
+  };
 
   const handleRecommend = async () => {
     if (!selectedMachineId) {
@@ -113,13 +146,19 @@ export function AiDashboardRecommendations() {
         
         <div className="space-y-2">
             <Label htmlFor="dashboard-location">Your Location</Label>
-            <Input 
-                id="dashboard-location"
-                placeholder="e.g., Mountain View, CA"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                disabled={!selectedMachineId}
-            />
+             <div className="flex gap-2">
+                <Input 
+                    id="dashboard-location"
+                    placeholder="e.g., Mountain View, CA"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    disabled={!selectedMachineId}
+                />
+                 <Button variant="outline" size="icon" onClick={handleUseCurrentLocation} disabled={!selectedMachineId || isLocating}>
+                    {isLocating ? <Loader2 className="animate-spin" /> :<LocateFixed />}
+                    <span className="sr-only">Use Current Location</span>
+                </Button>
+            </div>
         </div>
 
         <div className="min-h-[150px]">
@@ -154,7 +193,7 @@ export function AiDashboardRecommendations() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button onClick={handleRecommend} disabled={isLoading || !selectedMachineId} className="w-full">
+        <Button onClick={handleRecommend} disabled={isLoading || isLocating || !selectedMachineId} className="w-full">
           {isLoading ? 'Generating...' : 'Get Recommendations'}
         </Button>
       </CardFooter>
