@@ -51,7 +51,8 @@ export function AiRecommendations({ machine }: { machine: Machine }) {
       };
       const result = await runAiRecommendations(input);
       setRecommendation(result);
-    } catch (error)      toast({
+    } catch (error) {
+      toast({
         variant: 'destructive',
         title: 'Recommendation Failed',
         description: 'Could not generate AI recommendations. Please try again.',
