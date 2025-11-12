@@ -20,8 +20,8 @@ import {
   History,
   Settings,
   CircleHelp,
-  LogOut,
-  Home,
+  BookText,
+  Bell,
 } from 'lucide-react';
 import { Button } from '../ui/button';
 
@@ -29,6 +29,8 @@ const menuItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/machines', label: 'Machines', icon: Wrench },
   { href: '/history', label: 'History', icon: History },
+  { href: '/logs', label: 'Logs', icon: BookText },
+  { href: '/reminders', label: 'Reminders', icon: Bell },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 

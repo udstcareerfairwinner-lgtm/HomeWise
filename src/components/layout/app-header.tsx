@@ -13,12 +13,14 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
-import { Home, PanelLeft, Settings, Wrench, History } from 'lucide-react';
+import { Home, PanelLeft, Settings, Wrench, History, BookText, Bell } from 'lucide-react';
 
 const mobileMenuItems = [
     { href: '/', label: 'Dashboard', icon: Home },
     { href: '/machines', label: 'Machines', icon: Wrench },
     { href: '/history', label: 'History', icon: History },
+    { href: '/logs', label: 'Logs', icon: BookText },
+    { href: '/reminders', label: 'Reminders', icon: Bell },
     { href: '/settings', label: 'Settings', icon: Settings },
   ];
 
@@ -64,6 +66,7 @@ export function AppHeader() {
               <Link href="/">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
+          {pathSegments.length > 0 && <BreadcrumbSeparator />}
           {pathSegments.map((segment, index) => {
             const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
             const isLast = index === pathSegments.length - 1;
@@ -71,16 +74,16 @@ export function AppHeader() {
 
             return (
               <Fragment key={href}>
-                <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   {isLast ? (
                     <BreadcrumbPage>{label}</BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
-                        <Link href={href}>{label}</Link>
+                      <Link href={href}>{label}</Link>
                     </BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
+                {!isLast && <BreadcrumbSeparator />}
               </Fragment>
             );
           })}
