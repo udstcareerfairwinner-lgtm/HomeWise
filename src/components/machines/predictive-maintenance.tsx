@@ -23,7 +23,13 @@ type Prediction = {
   urgencyLevel: "Low" | "Medium" | "High";
 };
 
-export function PredictiveMaintenance({ machine }: { machine: Machine }) {
+type PredictiveMaintenanceProps = {
+  machine: Machine;
+  onPredict: (prediction: Prediction) => void;
+};
+
+
+export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintenanceProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<Prediction | null>(null);
   const { toast } = useToast();
@@ -50,6 +56,7 @@ export function PredictiveMaintenance({ machine }: { machine: Machine }) {
       };
       const result = await runPredictiveMaintenance(input);
       setPrediction(result);
+      onPredict(result); // Pass the prediction to the parent
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -114,7 +121,7 @@ export function PredictiveMaintenance({ machine }: { machine: Machine }) {
               Predicting...
             </>
           ) : (
-            'Predict Next Task'
+            'Predict & Set Reminder'
           )}
         </Button>
       </CardFooter>

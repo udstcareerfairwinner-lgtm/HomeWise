@@ -13,14 +13,15 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
-import { Home, PanelLeft, Settings, Wrench, History, Bell, AlertCircle } from 'lucide-react';
+import { Home, PanelLeft, Settings, Wrench, History, Bell, AlertCircle, Lightbulb } from 'lucide-react';
 
 const mobileMenuItems = [
     { href: '/', label: 'Dashboard', icon: Home },
     { href: '/machines', label: 'Machines', icon: Wrench },
-    { href: '/history', label: 'History', icon: History },
+    { href: '/predictions', label: 'Predictions', icon: Lightbulb },
     { href: '/reminders', label: 'Reminders', icon: Bell },
     { href: '/notifications', label: 'Notifications', icon: AlertCircle },
+    { href: '/history', label: 'History', icon: History },
     { href: '/settings', label: 'Settings', icon: Settings },
   ];
 
@@ -73,7 +74,7 @@ export function AppHeader() {
               <Link href="/">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {breadcrumbItems.map(({ href, label, isLast }, index) => (
+          {breadcrumbItems.map(({ href, label, isLast }) => (
             <Fragment key={href}>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
