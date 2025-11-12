@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -16,21 +17,22 @@ import {
 import { Badge } from '@/components/ui/badge';
 import {
   Calendar,
-  Wrench,
-  Trophy,
   AlertTriangle,
   CircleDollarSign,
   CarFront,
   Refrigerator,
   WashingMachine,
   AirVent,
+  Wrench,
+  PlusCircle,
+  Sparkles,
 } from 'lucide-react';
 import { CostSummaryChart } from '@/components/dashboard/cost-summary-chart';
 import { machines, maintenanceTasks } from '@/lib/data';
 import type { Machine } from '@/lib/types';
-import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
+import { AiDashboardRecommendations } from '@/components/dashboard/ai-dashboard-recommendations';
 
 const getMachineIcon = (category: Machine['category']) => {
   switch (category) {
@@ -65,6 +67,27 @@ export default function DashboardPage() {
       )
     )
     .slice(0, 3);
+    
+  if (machines.length === 0) {
+    return (
+        <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+            <div className="flex flex-col items-center gap-4 text-center">
+                <h3 className="text-2xl font-bold tracking-tight">
+                    You have no machines yet
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                    Get started by adding your first machine to track its maintenance.
+                </p>
+                <Button asChild className="mt-4">
+                    <Link href="/machines/add">
+                        <PlusCircle className="mr-2 h-4 w-4" />
+                        Add Machine
+                    </Link>
+                </Button>
+            </div>
+        </div>
+    );
+  }
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -116,40 +139,8 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="h-5 w-5" />
-            Gamification
-          </CardTitle>
-          <CardDescription>Your maintenance stats and streaks.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="font-medium">Maintenance Streak</span>
-            <span className="font-bold text-primary">12 Days 🔥</span>
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Level 4</span>
-                <span className="text-muted-foreground">Level 5</span>
-            </div>
-            <Progress value={60} />
-            <p className="text-sm text-center text-muted-foreground">400 points to next level</p>
-          </div>
-          <div className="flex justify-around pt-2 text-center">
-            <div>
-              <p className="text-2xl font-bold">25</p>
-              <p className="text-sm text-muted-foreground">Tasks Done</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold">3</p>
-              <p className="text-sm text-muted-foreground">Badges</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
+      <AiDashboardRecommendations />
+      
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

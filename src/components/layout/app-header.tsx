@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
-import { Home, PanelLeft, Settings, Wrench, History, BookText, Bell, AlertCircle } from 'lucide-react';
+import { Home, PanelLeft, Settings, Wrench, History, Bell, AlertCircle } from 'lucide-react';
 
 const mobileMenuItems = [
     { href: '/', label: 'Dashboard', icon: Home },
@@ -21,7 +21,6 @@ const mobileMenuItems = [
     { href: '/history', label: 'History', icon: History },
     { href: '/reminders', label: 'Reminders', icon: Bell },
     { href: '/notifications', label: 'Notifications', icon: AlertCircle },
-    { href: '/logs', label: 'Logs', icon: BookText },
     { href: '/settings', label: 'Settings', icon: Settings },
   ];
 
