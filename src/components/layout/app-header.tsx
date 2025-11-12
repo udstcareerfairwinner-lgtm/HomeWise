@@ -31,6 +31,7 @@ export function AppHeader() {
             const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
             const isLast = index === pathSegments.length - 1;
             const label = segment.charAt(0).toUpperCase() + segment.slice(1);
+
             return (
               <Fragment key={href}>
                 <BreadcrumbSeparator />
@@ -38,9 +39,7 @@ export function AppHeader() {
                   {isLast ? (
                     <BreadcrumbPage>{label}</BreadcrumbPage>
                   ) : (
-                    <BreadcrumbLink asChild>
-                      <Link href={href}>{label}</Link>
-                    </BreadcrumbLink>
+                    <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
               </Fragment>

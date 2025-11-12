@@ -94,9 +94,9 @@ export default function MachinesPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem asChild>
-                        <Link href={`/machines/${machine.id}`}>View Details</Link>
-                      </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Link href={`/machines/${machine.id}`}>View Details</Link>
+                        </DropdownMenuItem>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem className="text-destructive focus:text-destructive">
                         Delete
