@@ -39,7 +39,6 @@ export async function getMaintenanceRecommendations(input: MaintenanceRecommenda
 const prompt = ai.definePrompt({
   name: 'maintenanceRecommendationsPrompt',
   input: {schema: MaintenanceRecommendationsInputSchema},
-  output: {schema: MaintenanceRecommendationsOutputSchema},
   tools: [getGeolocationTool],
   prompt: `You are an AI assistant for the HomeCare AI app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
 
@@ -60,7 +59,7 @@ const prompt = ai.definePrompt({
   When recommending service providers, please suggest a few options for common locations (e.g., "a local auto shop," "a certified appliance repair service") since no specific location was provided.
   {{/if}}
 
-  Format your response in JSON.
+  Your response should be structured as a JSON object with the following keys: "costSavingTips", "recommendedServiceProviders", "estimatedRemainingLife", "criticalAttentionNeeded".
 `,
 });
 
@@ -71,7 +70,15 @@ const maintenanceRecommendationsFlow = ai.defineFlow(
     outputSchema: MaintenanceRecommendationsOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    const {output} = await ai.generate({
+        prompt: prompt.prompt,
+        input,
+        model: ai.model,
+        tools: [getGeolocationTool],
+        output: {
+            schema: MaintenanceRecommendationsOutputSchema,
+        }
+    });
+    return output;
   }
 );
