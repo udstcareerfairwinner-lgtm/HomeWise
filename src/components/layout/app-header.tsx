@@ -19,14 +19,22 @@ const mobileMenuItems = [
     { href: '/', label: 'Dashboard', icon: Home },
     { href: '/machines', label: 'Machines', icon: Wrench },
     { href: '/history', label: 'History', icon: History },
-    { href: '/logs', label: 'Logs', icon: BookText },
     { href: '/reminders', label: 'Reminders', icon: Bell },
+    { href: '/notifications', label: 'Notifications', icon: Bell },
+    { href: '/logs', label: 'Logs', icon: BookText },
     { href: '/settings', label: 'Settings', icon: Settings },
   ];
 
 export function AppHeader() {
   const pathname = usePathname();
   const pathSegments = pathname.split('/').filter(Boolean);
+
+  const breadcrumbItems = pathSegments.map((segment, index) => {
+    const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
+    const label = segment.charAt(0).toUpperCase() + segment.slice(1);
+    const isLast = index === pathSegments.length - 1;
+    return { href, label, isLast };
+  });
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -66,13 +74,8 @@ export function AppHeader() {
               <Link href="/">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {pathSegments.length > 0 && <BreadcrumbSeparator />}
-          {pathSegments.map((segment, index) => {
-            const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
-            const isLast = index === pathSegments.length - 1;
-            const label = segment.charAt(0).toUpperCase() + segment.slice(1);
-
-            return (
+          {breadcrumbItems.length > 0 && <BreadcrumbSeparator />}
+          {breadcrumbItems.map(({ href, label, isLast }) => (
               <Fragment key={href}>
                 <BreadcrumbItem>
                   {isLast ? (
@@ -85,8 +88,7 @@ export function AppHeader() {
                 </BreadcrumbItem>
                 {!isLast && <BreadcrumbSeparator />}
               </Fragment>
-            );
-          })}
+            ))}
         </BreadcrumbList>
       </Breadcrumb>
     </header>

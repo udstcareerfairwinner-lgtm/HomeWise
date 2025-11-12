@@ -29,8 +29,9 @@ const menuItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/machines', label: 'Machines', icon: Wrench },
   { href: '/history', label: 'History', icon: History },
-  { href: '/logs', label: 'Logs', icon: BookText },
   { href: '/reminders', label: 'Reminders', icon: Bell },
+  { href: '/notifications', label: 'Notifications', icon: Bell },
+  { href: '/logs', label: 'Logs', icon: BookText },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
