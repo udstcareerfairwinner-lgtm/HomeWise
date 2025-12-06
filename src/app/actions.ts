@@ -2,6 +2,7 @@
 
 import { predictMaintenance, PredictiveMaintenanceInput } from '@/ai/flows/predictive-maintenance';
 import { getMaintenanceRecommendations, MaintenanceRecommendationsInput } from '@/ai/flows/ai-maintenance-recommendations';
+import { chat, ChatInput } from '@/ai/flows/chat';
 import { z } from 'zod';
 
 const predictiveMaintenanceActionSchema = z.object({
@@ -57,5 +58,27 @@ export async function runAiRecommendations(input: MaintenanceRecommendationsInpu
     } catch (error) {
         console.error("Error in runAiRecommendations:", error);
         throw new Error('Failed to get AI recommendations.');
+    }
+}
+
+const chatActionSchema = z.object({
+  message: z.string(),
+  history: z.array(z.object({
+    role: z.enum(['user', 'model']),
+    content: z.string(),
+  })),
+});
+
+export async function runChat(input: ChatInput) {
+    const validatedInput = chatActionSchema.safeParse(input);
+    if (!validatedInput.success) {
+        throw new Error('Invalid input for chat.');
+    }
+    try {
+        const result = await chat(validatedInput.data);
+        return result;
+    } catch (error) {
+        console.error("Error in runChat:", error);
+        throw new Error('Failed to get chat response.');
     }
 }
