@@ -9,35 +9,13 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {
+    PredictiveMaintenanceInputSchema,
+    PredictiveMaintenanceOutputSchema,
+    type PredictiveMaintenanceInput
+} from '@/ai/schemas';
 
-const PredictiveMaintenanceInputSchema = z.object({
-  category: z.string().describe('The category of the machine (e.g., Vehicle, Kitchen Appliance).'),
-  brand: z.string().describe('The brand of the machine (e.g., Toyota, Samsung).'),
-  model: z.string().describe('The model of the machine (e.g., Corolla 2020, RF28R7551SR).'),
-  lastMaintenance: z.string().describe('The date of the last maintenance (YYYY-MM-DD).'),
-  purchaseDate: z.string().describe('The purchase date of the machine (YYYY-MM-DD).'),
-  usageFrequency: z.string().describe('How often the machine is used (e.g., Daily, Weekly, Monthly).'),
-  warrantyExpiry: z.string().describe('The warranty expiry date of the machine (YYYY-MM-DD).'),
-  maintenanceHistory: z.array(
-    z.object({
-      task: z.string().describe('The maintenance task performed (e.g., Oil Change).'),
-      date: z.string().describe('The date the task was completed (YYYY-MM-DD).'),
-      cost: z.number().describe('The cost of the maintenance task.'),
-    })
-  ).optional().describe('History of maintenance tasks performed on the machine.'),
-});
-
-export type PredictiveMaintenanceInput = z.infer<typeof PredictiveMaintenanceInputSchema>;
-
-const PredictiveMaintenanceOutputSchema = z.object({
-  taskName: z.string().describe('The name of the recommended maintenance task.'),
-  nextMaintenanceDate: z.string().describe('The predicted date for the next maintenance (YYYY-MM-DD).'),
-  estimatedCost: z.number().describe('The estimated cost for the maintenance task.'),
-  urgencyLevel: z.enum(['Low', 'Medium', 'High']).describe('The urgency level of the maintenance task.'),
-});
-
-export type PredictiveMaintenanceOutput = z.infer<typeof PredictiveMaintenanceOutputSchema>;
+export { type PredictiveMaintenanceOutput } from '@/ai/schemas';
 
 export async function predictMaintenance(input: PredictiveMaintenanceInput): Promise<PredictiveMaintenanceOutput> {
   return predictMaintenanceFlow(input);

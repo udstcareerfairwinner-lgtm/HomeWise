@@ -9,28 +9,14 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
 import {getGeolocationTool} from './tools/geolocation';
+import {
+    MaintenanceRecommendationsInputSchema,
+    MaintenanceRecommendationsOutputSchema,
+    type MaintenanceRecommendationsInput
+} from '@/ai/schemas';
 
-const MaintenanceRecommendationsInputSchema = z.object({
-  machineType: z.string().describe('The type of machine (e.g., car, fridge, AC).'),
-  brand: z.string().describe('The brand of the machine.'),
-  model: z.string().describe('The model of the machine.'),
-  usageFrequency: z.string().describe('How often the machine is used (e.g., daily, weekly, monthly).'),
-  lastMaintenanceDate: z.string().describe('The date of the last maintenance.'),
-  purchaseDate: z.string().describe('The date the machine was purchased.'),
-  maintenanceHistory: z.string().describe('The maintenance history of the machine.'),
-  location: z.string().optional().describe('The user\'s current location (e.g., city, address, or zip code) to find nearby service providers.'),
-});
-export type MaintenanceRecommendationsInput = z.infer<typeof MaintenanceRecommendationsInputSchema>;
-
-const MaintenanceRecommendationsOutputSchema = z.object({
-  costSavingTips: z.string().describe('AI-powered recommendations for saving costs on maintaining the machine.'),
-  recommendedServiceProviders: z.string().describe('Recommended nearby service providers for maintenance. If a location is provided, suggestions should be specific to that area.'),
-  estimatedRemainingLife: z.string().describe('Estimated remaining useful life for the machine.'),
-  criticalAttentionNeeded: z.string().describe('Highlights if the machine needs critical attention.'),
-});
-export type MaintenanceRecommendationsOutput = z.infer<typeof MaintenanceRecommendationsOutputSchema>;
+export { type MaintenanceRecommendationsOutput } from '@/ai/schemas';
 
 export async function getMaintenanceRecommendations(input: MaintenanceRecommendationsInput): Promise<MaintenanceRecommendationsOutput> {
   const { output } = await prompt(input);

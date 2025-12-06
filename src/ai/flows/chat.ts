@@ -10,21 +10,9 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { ChatInputSchema, ChatOutputSchema } from '../schemas';
 
-const ChatHistorySchema = z.object({
-  role: z.enum(['user', 'model']),
-  content: z.string(),
-});
-
-const ChatInputSchema = z.object({
-  message: z.string().describe('The user\'s message.'),
-  history: z.array(ChatHistorySchema).optional().describe('The chat history.'),
-});
 export type ChatInput = z.infer<typeof ChatInputSchema>;
-
-const ChatOutputSchema = z.object({
-  response: z.string().describe('The AI\'s response message.'),
-});
 export type ChatOutput = z.infer<typeof ChatOutputSchema>;
 
 
