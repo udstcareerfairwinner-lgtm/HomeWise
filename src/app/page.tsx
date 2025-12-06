@@ -113,7 +113,7 @@ export default function DashboardPage() {
         <div className="container mx-auto px-4 py-16 text-center">
             <Wrench className="mx-auto h-16 w-16 text-primary" />
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-                Welcome to HomeCare AI
+                Welcome to Homewise
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
                 The smart way to manage maintenance for every machine in your life. Stop guessing, start predicting. Add your first machine to unlock AI-powered insights and never miss a maintenance task again.

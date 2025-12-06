@@ -47,7 +47,7 @@ const prompt = ai.definePrompt({
   name: 'predictMaintenancePrompt',
   input: { schema: PredictiveMaintenanceInputSchema },
   output: { schema: PredictiveMaintenanceOutputSchema },
-  prompt: `You are an AI assistant for the HomeCare AI app. Given the following information about a household machine, predict the next maintenance date and type of task required. Also, provide a recommended cost range for the task and urgency level (Low, Medium, High). Output in JSON format with fields: taskName, nextMaintenanceDate, estimatedCost, urgencyLevel.\n\nMachine Category: {{{category}}}\nBrand: {{{brand}}}\nModel: {{{model}}}\nLast Maintenance Date: {{{lastMaintenance}}}\nPurchase Date: {{{purchaseDate}}}\nUsage Frequency: {{{usageFrequency}}}\nWarranty Expiry: {{{warrantyExpiry}}}\n\n{{#if maintenanceHistory}}\nMaintenance History:\n{{#each maintenanceHistory}}\n- Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}\n{{/each}}\n{{/if}}`,
+  prompt: `You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance date and type of task required. Also, provide a recommended cost range for the task and urgency level (Low, Medium, High). Output in JSON format with fields: taskName, nextMaintenanceDate, estimatedCost, urgencyLevel.\n\nMachine Category: {{{category}}}\nBrand: {{{brand}}}\nModel: {{{model}}}\nLast Maintenance Date: {{{lastMaintenance}}}\nPurchase Date: {{{purchaseDate}}}\nUsage Frequency: {{{usageFrequency}}}\nWarranty Expiry: {{{warrantyExpiry}}}\n\n{{#if maintenanceHistory}}\nMaintenance History:\n{{#each maintenanceHistory}}\n- Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}\n{{/each}}\n{{/if}}`,
 });
 
 const predictMaintenanceFlow = ai.defineFlow(

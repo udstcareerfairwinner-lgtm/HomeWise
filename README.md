@@ -1,6 +1,6 @@
-# HomeCare AI: Smart Maintenance for Your Home
+# Homewise: Smart Maintenance for Your Home
 
-HomeCare AI is a modern web application designed to help you intelligently manage and track the maintenance needs of all your household machines and vehicles. From your car to your kitchen appliances, HomeCare AI leverages the power of generative AI to provide predictive insights, cost-saving recommendations, and timely reminders, ensuring your valuable assets are always in top condition.
+Homewise is a modern web application designed to help you intelligently manage and track the maintenance needs of all your household machines and vehicles. From your car to your kitchen appliances, Homewise leverages the power of generative AI to provide predictive insights, cost-saving recommendations, and timely reminders, ensuring your valuable assets are always in top condition.
 
 This project is built with a modern, scalable tech stack, making it a robust starting point for a production-ready application.
 

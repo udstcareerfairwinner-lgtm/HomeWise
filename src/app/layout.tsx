@@ -5,7 +5,7 @@ import { AppHeader } from '@/components/layout/app-header';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'HomeCare AI',
+  title: 'Homewise',
   description: 'Smart Maintenance for Every Machine in Your Life',
 };
 

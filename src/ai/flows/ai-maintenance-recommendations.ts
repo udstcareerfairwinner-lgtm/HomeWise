@@ -33,7 +33,8 @@ const MaintenanceRecommendationsOutputSchema = z.object({
 export type MaintenanceRecommendationsOutput = z.infer<typeof MaintenanceRecommendationsOutputSchema>;
 
 export async function getMaintenanceRecommendations(input: MaintenanceRecommendationsInput): Promise<MaintenanceRecommendationsOutput> {
-  return maintenanceRecommendationsFlow(input);
+  const { output } = await prompt(input);
+  return output!;
 }
 
 const prompt = ai.definePrompt({
@@ -41,7 +42,7 @@ const prompt = ai.definePrompt({
   input: {schema: MaintenanceRecommendationsInputSchema},
   output: {schema: MaintenanceRecommendationsOutputSchema},
   tools: [getGeolocationTool],
-  prompt: `You are an AI assistant for the HomeCare AI app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
+  prompt: `You are an AI assistant for the Homewise app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
 
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
