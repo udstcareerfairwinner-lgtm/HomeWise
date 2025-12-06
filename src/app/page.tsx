@@ -108,7 +108,7 @@ export default function LandingPage() {
         </p>
         <div className="mt-10">
           <Button asChild size="lg">
-            <Link href="/dashboard">
+            <Link href="/machines/add">
               <PlusCircle className="mr-2 h-5 w-5" />
               Add Your First Machine
             </Link>
