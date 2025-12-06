@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -106,12 +107,15 @@ export default function LandingPage() {
           Stop guessing, start predicting. Add your first machine to unlock
           AI-powered insights and never miss a maintenance task again.
         </p>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg">
             <Link href="/machines/add">
               <PlusCircle className="mr-2 h-5 w-5" />
               Add Your First Machine
             </Link>
+          </Button>
+          <Button asChild size="lg" variant="secondary">
+            <Link href="/dashboard">Go to Dashboard</Link>
           </Button>
         </div>
       </div>
@@ -233,11 +237,6 @@ export default function LandingPage() {
                 dashboard.
               </p>
             </div>
-          </div>
-          <div className="mt-16">
-            <Button asChild size="lg" variant="secondary">
-              <Link href="/dashboard">Get Started for Free</Link>
-            </Button>
           </div>
         </div>
       </div>
