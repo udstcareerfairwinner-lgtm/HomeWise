@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Lightbulb, Sparkles, Wrench, ShieldCheck, Truck, Droplets, Wind, PlusCircle, Bot } from 'lucide-react';
+import { Lightbulb, Sparkles, Wrench, PlusCircle, Bot, LocateFixed, BarChart, Bell } from 'lucide-react';
 import { AiChat } from '@/components/chat/ai-chat';
 import { machines } from '@/lib/data';
 import DashboardPage from '@/components/dashboard/dashboard-page';
@@ -20,24 +20,24 @@ const features = [
         description: "Get smart suggestions for cost-saving, estimated machine life, and critical alerts."
     },
      {
-        icon: <Truck className="h-10 w-10 text-primary" />,
-        title: "Vehicle Maintenance",
-        description: "Keep your car, truck, or motorcycle in top condition with tailored predictions."
+        icon: <LocateFixed className="h-10 w-10 text-primary" />,
+        title: "Nearby Service Providers",
+        description: "Find trusted and reliable local service centers for your specific maintenance needs."
     },
     {
-        icon: <Droplets className="h-10 w-10 text-primary" />,
-        title: "Appliance Servicing",
-        description: "From refrigerators to washing machines, know the right time for a tune-up."
+        icon: <Wrench className="h-10 w-10 text-primary" />,
+        title: "Centralized Management",
+        description: "Track all your vehicles, appliances, and machines in one organized dashboard."
     },
     {
-        icon: <Wind className="h-10 w-10 text-primary" />,
-        title: "HVAC & Systems",
-        description: "Ensure your home's heating and cooling systems are running efficiently year-round."
+        icon: <Bell className="h-10 w-10 text-primary" />,
+        title: "Automatic Reminders",
+        description: "Set custom reminders or let our AI automatically create them based on predictions."
     },
     {
-        icon: <ShieldCheck className="h-10 w-10 text-primary" />,
-        title: "Warranty Tracking",
-        description: "Never lose track of warranty expirations for your valuable appliances."
+        icon: <BarChart className="h-10 w-10 text-primary" />,
+        title: "History & Cost Tracking",
+        description: "Maintain a complete log of all maintenance tasks, costs, and service history."
     },
 ];
 
