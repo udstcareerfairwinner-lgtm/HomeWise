@@ -31,6 +31,7 @@ const prompt = ai.definePrompt({
   tools: [getGeolocationTool],
   prompt: `You are an AI assistant for the Homewise app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
 
+  {{#with tool_code_tool_input}}
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
   Machine Type: {{{category}}}
@@ -54,6 +55,7 @@ const prompt = ai.definePrompt({
   {{else}}
   When recommending service providers, please suggest a few options for common locations (e.g., "a local auto shop," "a certified appliance repair service") since no specific location was provided.
   {{/if}}
+  {{/with}}
 
   Your response should be structured as a JSON object that strictly adheres to the output schema.
 `,
