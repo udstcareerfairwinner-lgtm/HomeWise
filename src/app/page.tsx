@@ -23,8 +23,6 @@ import {
   Smile,
 } from 'lucide-react';
 import { AiChat } from '@/components/chat/ai-chat';
-import { machines } from '@/lib/data';
-import DashboardPage from '@/components/dashboard/dashboard-page';
 import {
   Dialog,
   DialogContent,
@@ -95,11 +93,6 @@ const benefits = [
 ];
 
 export default function LandingPage() {
-  // If there are machines, show the dashboard. Otherwise, show the landing page.
-  if (machines && machines.length > 0) {
-    return <DashboardPage />;
-  }
-
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
@@ -115,7 +108,7 @@ export default function LandingPage() {
         </p>
         <div className="mt-10">
           <Button asChild size="lg">
-            <Link href="/machines/add">
+            <Link href="/dashboard">
               <PlusCircle className="mr-2 h-5 w-5" />
               Add Your First Machine
             </Link>
@@ -243,7 +236,7 @@ export default function LandingPage() {
           </div>
           <div className="mt-16">
             <Button asChild size="lg" variant="secondary">
-              <Link href="/machines/add">Get Started for Free</Link>
+              <Link href="/dashboard">Get Started for Free</Link>
             </Button>
           </div>
         </div>

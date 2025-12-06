@@ -16,7 +16,7 @@ import { Button } from '../ui/button';
 import { Home, PanelLeft, Settings, Wrench, History, Bell, AlertCircle, Lightbulb } from 'lucide-react';
 
 const mobileMenuItems = [
-    { href: '/', label: 'Dashboard', icon: Home },
+    { href: '/dashboard', label: 'Dashboard', icon: Home },
     { href: '/machines', label: 'Machines', icon: Wrench },
     { href: '/predictions', label: 'Predictions', icon: Lightbulb },
     { href: '/reminders', label: 'Reminders', icon: Bell },
@@ -48,7 +48,7 @@ export function AppHeader() {
             <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
-                  href="#"
+                  href="/"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
                   <Wrench className="h-5 w-5 transition-all group-hover:scale-110" />
@@ -71,7 +71,7 @@ export function AppHeader() {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Dashboard</Link>
+              <Link href="/">Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           {breadcrumbItems.map(({ href, label, isLast }) => (
