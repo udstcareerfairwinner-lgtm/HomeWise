@@ -104,14 +104,14 @@ export default function LandingPage() {
         </h1>
         <p className="mx-auto mt-6 max-w-3xl text-lg text-muted-foreground">
           The smart way to manage maintenance for every machine in your life.
-          Stop guessing, start predicting. Add your first machine to unlock
+          Stop guessing, start predicting. Add a new machine to unlock
           AI-powered insights and never miss a maintenance task again.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild size="lg">
             <Link href="/machines/add">
               <PlusCircle className="mr-2 h-5 w-5" />
-              Add Your First Machine
+              Add a New Machine
             </Link>
           </Button>
           <Button asChild size="lg" variant="secondary">
