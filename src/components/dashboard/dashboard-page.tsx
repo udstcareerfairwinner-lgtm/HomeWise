@@ -70,8 +70,7 @@ export default function DashboardPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <div className="grid auto-rows-max items-start gap-6 lg:col-span-2">
-        <Card>
+        <Card className="lg:col-span-2">
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="space-y-1.5">
                 <CardTitle className="flex items-center gap-2">
@@ -118,23 +117,7 @@ export default function DashboardPage() {
               </Table>
             </CardContent>
         </Card>
-         <Card className="lg:col-span-3">
-            <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-                <CircleDollarSign className="h-5 w-5" />
-                Cost & Savings Summary
-            </CardTitle>
-            <CardDescription>
-                Monthly maintenance expenses and estimated savings.
-            </CardDescription>
-            </CardHeader>
-            <CardContent>
-            <CostSummaryChart />
-            </CardContent>
-        </Card>
-      </div>
       
-      <div className="grid auto-rows-max items-start gap-6 lg:col-span-1">
         <Card>
             <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -180,8 +163,23 @@ export default function DashboardPage() {
             )}
             </CardContent>
         </Card>
+
+        <Card className="lg:col-span-2">
+            <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+                <CircleDollarSign className="h-5 w-5" />
+                Cost & Savings Summary
+            </CardTitle>
+            <CardDescription>
+                Monthly maintenance expenses and estimated savings.
+            </CardDescription>
+            </CardHeader>
+            <CardContent>
+            <CostSummaryChart />
+            </CardContent>
+        </Card>
+        
         <WarrantyStatus />
-      </div>
     </div>
   );
 }
