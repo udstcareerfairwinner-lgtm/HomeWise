@@ -33,22 +33,22 @@ const prompt = ai.definePrompt({
 
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
-  Machine Type: {{{tool_code_tool_input.category}}}
-  Brand: {{{tool_code_tool_input.brand}}}
-  Model: {{{tool_code_tool_input.model}}}
-  Usage Frequency: {{{tool_code_tool_input.usageFrequency}}}
-  Last Maintenance Date: {{{tool_code_tool_input.lastMaintenanceDate}}}
-  Purchase Date: {{{tool_code_tool_input.purchaseDate}}}
+  Machine Type: {{{category}}}
+  Brand: {{{brand}}}
+  Model: {{{model}}}
+  Usage Frequency: {{{usageFrequency}}}
+  Last Maintenance Date: {{{lastMaintenanceDate}}}
+  Purchase Date: {{{purchaseDate}}}
 
-  {{#if tool_code_tool_input.maintenanceHistory}}
+  {{#if maintenanceHistory}}
   Maintenance History:
-  {{#each tool_code_tool_input.maintenanceHistory}}
+  {{#each maintenanceHistory}}
   - Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}
   {{/each}}
   {{/if}}
 
-  {{#if tool_code_tool_input.location}}
-  User's Location: {{{tool_code_tool_input.location}}}
+  {{#if location}}
+  User's Location: {{{location}}}
   
   When recommending service providers, use the getGeolocationTool to find the coordinates for the user's location. Then, suggest specific, real service providers or types of service providers (like 'Toyota dealership' or 'certified auto repair shops') near that location. For non-vehicle machines, suggest general service types available in the area.
   {{else}}
