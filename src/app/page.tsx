@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -153,17 +152,17 @@ export default function LandingPage() {
 
       {/* Benefits Section */}
       <div className="py-20">
-        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-10 text-center">
+        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-10">
           {benefits.map((benefit) => (
-            <div key={benefit.title} className="flex flex-col items-center">
+            <Card key={benefit.title} className="flex flex-col items-center text-center p-6 bg-card rounded-xl shadow-sm transition-transform hover:scale-105 hover:shadow-primary/10">
               {benefit.icon}
-              <h3 className="mt-4 text-2xl font-bold text-primary">
+              <h3 className="mt-4 text-2xl font-bold">
                 {benefit.title}
               </h3>
               <p className="mt-2 text-muted-foreground">
                 {benefit.description}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
