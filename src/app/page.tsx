@@ -108,7 +108,7 @@ export default function DashboardPage() {
     
   if (machines.length === 0) {
     return (
-      <div className="bg-background text-foreground">
+      <div className="bg-gradient-to-b from-background to-muted/40 text-foreground">
         <div className="container mx-auto px-4 py-16 text-center">
             <Wrench className="mx-auto h-16 w-16 text-primary" />
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -127,7 +127,7 @@ export default function DashboardPage() {
             </div>
         </div>
 
-        <div className="bg-muted/40 py-20">
+        <div className="py-20">
             <div className="container mx-auto px-4">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold tracking-tight">Features to Keep Your Home Running Smoothly</h2>
