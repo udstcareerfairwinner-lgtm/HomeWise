@@ -70,7 +70,7 @@ export default function DashboardPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-3">
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="space-y-1.5">
                 <CardTitle className="flex items-center gap-2">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
 
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-1">
             <CardHeader>
             <CardTitle className="flex items-center gap-2">
                 <CircleDollarSign className="h-5 w-5" />

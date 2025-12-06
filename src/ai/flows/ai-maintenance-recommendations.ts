@@ -18,18 +18,17 @@ import {
 } from '@/ai/schemas';
 
 export { type MaintenanceRecommendationsOutput } from '@/ai/schemas';
+export type { MaintenanceRecommendationsInput };
+
 
 export async function getMaintenanceRecommendations(input: MaintenanceRecommendationsInput): Promise<MaintenanceRecommendationsOutput> {
-  const { output } = await prompt(input);
-  return output!;
+  return await maintenanceRecommendationsFlow(input);
 }
 
 const prompt = ai.definePrompt({
   name: 'maintenanceRecommendationsPrompt',
   input: {schema: MaintenanceRecommendationsInputSchema},
   output: {schema: MaintenanceRecommendationsOutputSchema},
-  tools: [getGeolocationTool],
-  model: 'gemini-1.5-flash',
   prompt: `You are an AI assistant for the Homewise app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
 
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
@@ -67,7 +66,10 @@ const maintenanceRecommendationsFlow = ai.defineFlow(
     outputSchema: MaintenanceRecommendationsOutputSchema,
   },
   async input => {
-    const { output } = await prompt(input);
-    return output!;
+    const { output } = await prompt.generate({ input, tools: [getGeolocationTool] });
+    if (!output) {
+      throw new Error('Unable to generate recommendations.');
+    }
+    return output;
   }
 );
