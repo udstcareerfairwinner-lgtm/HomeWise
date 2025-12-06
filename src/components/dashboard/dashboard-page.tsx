@@ -83,13 +83,13 @@ export default function DashboardPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <Table>
+               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Machine</TableHead>
-                    <TableHead>Task</TableHead>
-                    <TableHead>Due Date</TableHead>
-                    <TableHead className="text-right">Urgency</TableHead>
+                    <TableHead className="w-[30%]">Machine</TableHead>
+                    <TableHead className="w-[40%]">Task</TableHead>
+                    <TableHead className="hidden md:table-cell w-[20%]">Due Date</TableHead>
+                    <TableHead className="text-right w-[10%]">Urgency</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -97,11 +97,11 @@ export default function DashboardPage() {
                     const machine = machines.find((m) => m.id === task.machineId);
                     return (
                       <TableRow key={task.id}>
-                        <TableCell className="font-medium">
+                        <TableCell className="font-medium truncate">
                           {machine?.name || 'N/A'}
                         </TableCell>
-                        <TableCell>{task.taskName}</TableCell>
-                        <TableCell>{task.dueDate}</TableCell>
+                        <TableCell className="truncate">{task.taskName}</TableCell>
+                        <TableCell className="hidden md:table-cell">{task.dueDate}</TableCell>
                         <TableCell className="text-right">
                           <Badge
                             variant={urgencyVariant[task.urgencyLevel]}
