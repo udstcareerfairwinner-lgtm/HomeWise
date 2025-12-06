@@ -33,7 +33,7 @@ const prompt = ai.definePrompt({
 
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
-  Machine Type: {{{tool_code_tool_input.machineType}}}
+  Machine Type: {{{tool_code_tool_input.category}}}
   Brand: {{{tool_code_tool_input.brand}}}
   Model: {{{tool_code_tool_input.model}}}
   Usage Frequency: {{{tool_code_tool_input.usageFrequency}}}

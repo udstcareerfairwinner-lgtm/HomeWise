@@ -1,4 +1,3 @@
-
 import { z } from 'zod';
 
 export const PredictiveMaintenanceInputSchema = z.object({
@@ -59,7 +58,7 @@ export type PredictiveMaintenanceOutput = z.infer<
 >;
 
 export const MaintenanceRecommendationsInputSchema = z.object({
-  machineType: z
+  category: z
     .string()
     .describe('The type of machine (e.g., car, fridge, AC).'),
   brand: z.string().describe('The brand of the machine.'),

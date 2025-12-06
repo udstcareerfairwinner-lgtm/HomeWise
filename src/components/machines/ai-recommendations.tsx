@@ -77,7 +77,7 @@ export function AiRecommendations({ machine }: { machine: Machine }) {
     setRecommendation(null);
     try {
       const input = {
-        machineType: machine.category,
+        category: machine.category,
         brand: machine.brand,
         model: machine.model,
         usageFrequency: machine.usageFrequency,
