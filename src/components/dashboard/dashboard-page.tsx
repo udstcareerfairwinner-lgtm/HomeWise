@@ -30,7 +30,6 @@ import { CostSummaryChart } from '@/components/dashboard/cost-summary-chart';
 import { machines, maintenanceTasks } from '@/lib/data';
 import type { Machine } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AiDashboardRecommendations } from '@/components/dashboard/ai-dashboard-recommendations';
 
 const getMachineIcon = (category: Machine['category']) => {
   switch (category) {
@@ -117,10 +116,8 @@ export default function DashboardPage() {
           </Table>
         </CardContent>
       </Card>
-
-      <AiDashboardRecommendations />
       
-      <Card>
+      <Card className="lg:col-span-1">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-destructive" />
@@ -166,7 +163,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      <Card className="lg:col-span-2">
+      <Card className="lg:col-span-3">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CircleDollarSign className="h-5 w-5" />
