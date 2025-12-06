@@ -70,22 +70,23 @@ export default function DashboardPage() {
     
   if (machines.length === 0) {
     return (
-        <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
-            <div className="flex flex-col items-center gap-4 text-center">
-                <h3 className="text-2xl font-bold tracking-tight">
-                    You have no machines yet
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                    Get started by adding your first machine to track its maintenance.
-                </p>
-                <Button asChild className="mt-4">
-                    <Link href="/machines/add">
-                        <PlusCircle className="mr-2 h-4 w-4" />
-                        Add Machine
-                    </Link>
-                </Button>
-            </div>
+      <div className="flex flex-1 items-center justify-center rounded-lg bg-background p-8">
+        <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
+          <Wrench className="h-16 w-16 text-primary" />
+          <h1 className="text-4xl font-bold tracking-tight">
+            Welcome to HomeCare AI
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            The smart way to manage maintenance for every machine in your life. Stop guessing, start predicting. Add your first machine to unlock AI-powered insights and never miss a maintenance task again.
+          </p>
+          <Button asChild size="lg" className="mt-4">
+            <Link href="/machines/add">
+              <PlusCircle className="mr-2 h-5 w-5" />
+              Add Your First Machine
+            </Link>
+          </Button>
         </div>
+      </div>
     );
   }
 

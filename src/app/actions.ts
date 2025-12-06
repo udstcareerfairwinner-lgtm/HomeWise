@@ -48,6 +48,7 @@ const aiRecommendationsActionSchema = z.object({
 export async function runAiRecommendations(input: MaintenanceRecommendationsInput) {
     const validatedInput = aiRecommendationsActionSchema.safeParse(input);
     if (!validatedInput.success) {
+        console.error('Invalid input for AI recommendations:', validatedInput.error);
         throw new Error('Invalid input for AI recommendations.');
     }
     try {
