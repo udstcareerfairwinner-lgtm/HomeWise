@@ -152,24 +152,42 @@ export default function LandingPage() {
 
       {/* Benefits Section */}
       <div className="py-20">
-        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-10">
-          {benefits.map((benefit) => (
-            <Card key={benefit.title} className="flex flex-col items-center text-center p-6 bg-card rounded-xl shadow-sm transition-transform hover:scale-105 hover:shadow-primary/10">
-              {benefit.icon}
-              <h3 className="mt-4 text-2xl font-bold">
-                {benefit.title}
-              </h3>
-              <p className="mt-2 text-muted-foreground">
-                {benefit.description}
-              </p>
-            </Card>
-          ))}
+        <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold tracking-tight">
+                What You Gain with Homewise
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                More than just a tool—it's peace of mind for your home.
+                </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-10">
+            {benefits.map((benefit) => (
+                <Card key={benefit.title} className="flex flex-col items-center text-center p-6 bg-card rounded-xl shadow-sm transition-transform hover:scale-105 hover:shadow-primary/10">
+                {benefit.icon}
+                <h3 className="mt-4 text-2xl font-bold">
+                    {benefit.title}
+                </h3>
+                <p className="mt-2 text-muted-foreground">
+                    {benefit.description}
+                </p>
+                </Card>
+            ))}
+            </div>
         </div>
       </div>
 
       {/* AI Chatbot Section */}
       <div className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold tracking-tight">
+                    Have a Question?
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                    Ask our AI assistant for tips, advice, or troubleshooting steps.
+                </p>
+            </div>
           <Dialog>
             <DialogTrigger asChild>
               <Card className="max-w-3xl mx-auto text-center p-8 cursor-pointer hover:bg-card/80 transition-colors shadow-lg hover:shadow-primary/20">
@@ -179,8 +197,7 @@ export default function LandingPage() {
                     Ask Our AI Assistant
                   </CardTitle>
                   <CardDescription className="text-base">
-                    Have a question about appliance maintenance? Click here to
-                    ask our AI for tips, advice, or troubleshooting steps.
+                    Click here to start a conversation about appliance maintenance, troubleshooting, or anything else.
                   </CardDescription>
                 </CardHeader>
               </Card>
