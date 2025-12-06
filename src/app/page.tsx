@@ -108,7 +108,7 @@ export default function DashboardPage() {
     
   if (machines.length === 0) {
     return (
-      <div className="bg-gradient-to-b from-background to-muted/40 text-foreground">
+      <div className="bg-background text-foreground">
         <div className="container mx-auto px-4 py-16 text-center">
             <Wrench className="mx-auto h-16 w-16 text-primary" />
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
@@ -136,17 +136,19 @@ export default function DashboardPage() {
 
                 <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {features.map((feature) => (
-                        <div key={feature.title} className="flex flex-col items-center text-center p-6 bg-card rounded-lg shadow-sm">
-                            {feature.icon}
+                        <Card key={feature.title} className="flex flex-col items-center text-center p-6 bg-card rounded-lg transition-transform hover:scale-105 hover:shadow-primary/20 shadow-lg">
+                           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                             {feature.icon}
+                           </div>
                             <h3 className="mt-5 text-xl font-semibold">{feature.title}</h3>
                             <p className="mt-2 text-muted-foreground">{feature.description}</p>
-                        </div>
+                        </Card>
                     ))}
                 </div>
             </div>
         </div>
         
-         <div className="py-20">
+         <div className="py-20 bg-muted/20">
             <div className="container mx-auto px-4 text-center">
                  <h2 className="text-3xl font-bold tracking-tight">How It Works</h2>
                  <div className="mt-12 grid gap-10 md:grid-cols-3">
