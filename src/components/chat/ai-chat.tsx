@@ -50,8 +50,20 @@ export function AiChat() {
 
   return (
     <div className="flex flex-col h-[400px]">
-      <ScrollArea className="flex-grow p-4">
-        <div className="space-y-4">
+      <ScrollArea className="flex-grow p-4 -mx-6">
+        <div className="space-y-4 px-6">
+          {messages.length === 0 && (
+              <div className="flex items-start gap-3">
+                 <Avatar className="h-8 w-8">
+                  <AvatarFallback>
+                    <Bot />
+                  </AvatarFallback>
+                </Avatar>
+                 <div className="max-w-xs rounded-lg px-4 py-2 bg-muted">
+                    <p className="text-sm">Hello! How can I help you with your home maintenance today?</p>
+                 </div>
+            </div>
+          )}
           {messages.map((message, index) => (
             <div
               key={index}
@@ -98,7 +110,7 @@ export function AiChat() {
           )}
         </div>
       </ScrollArea>
-      <div className="border-t p-4">
+      <div className="border-t p-4 -mb-6 -mx-6">
         <form onSubmit={handleSendMessage} className="flex items-center gap-2">
           <Input
             value={input}
