@@ -22,7 +22,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
-        <div className="flex min-h-screen w-full flex-col bg-gradient-to-b from-green-500/10 via-background to-gray-500/10 dark:from-green-900/20 dark:to-gray-900/20">
+        <div className="flex min-h-screen w-full flex-col bg-gradient-to-b from-blue-500/10 via-background to-gray-500/10 dark:from-blue-900/20 dark:to-gray-900/20">
             <AppSidebar />
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
                 <AppHeader />

@@ -29,9 +29,9 @@ const prompt = ai.definePrompt({
   input: {schema: MaintenanceRecommendationsInputSchema},
   output: {schema: MaintenanceRecommendationsOutputSchema},
   tools: [getGeolocationTool],
+  model: 'gemini-1.5-flash',
   prompt: `You are an AI assistant for the Homewise app. Your purpose is to provide users with recommendations on how to save costs on maintaining their machines and vehicles.
 
-  {{#with tool_code_tool_input}}
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
   Machine Type: {{{category}}}
@@ -49,13 +49,12 @@ const prompt = ai.definePrompt({
   {{/if}}
 
   {{#if location}}
-  User's Location: {{{location}}}
+  The user has provided their location as: {{{location}}}.
   
   When recommending service providers, use the getGeolocationTool to find the coordinates for the user's location. Then, suggest specific, real service providers or types of service providers (like 'Toyota dealership' or 'certified auto repair shops') near that location. For non-vehicle machines, suggest general service types available in the area.
   {{else}}
-  When recommending service providers, please suggest a few options for common locations (e.g., "a local auto shop," "a certified appliance repair service") since no specific location was provided.
+  No specific location was provided. When recommending service providers, please suggest generic options like "a local auto shop," or "a certified appliance repair service".
   {{/if}}
-  {{/with}}
 
   Your response should be structured as a JSON object that strictly adheres to the output schema.
 `,
