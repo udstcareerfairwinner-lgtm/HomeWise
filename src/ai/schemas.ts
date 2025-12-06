@@ -1,3 +1,4 @@
+
 import { z } from 'zod';
 
 export const PredictiveMaintenanceInputSchema = z.object({
@@ -69,7 +70,14 @@ export const MaintenanceRecommendationsInputSchema = z.object({
   lastMaintenanceDate: z.string().describe('The date of the last maintenance.'),
   purchaseDate: z.string().describe('The date the machine was purchased.'),
   maintenanceHistory: z
-    .string()
+    .array(
+      z.object({
+        task: z.string().describe('The maintenance task performed.'),
+        date: z.string().describe('The date of the task.'),
+        cost: z.number().describe('The cost of the task.'),
+      })
+    )
+    .optional()
     .describe('The maintenance history of the machine.'),
   location: z
     .string()

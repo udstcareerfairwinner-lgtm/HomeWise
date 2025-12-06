@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -38,7 +39,14 @@ const prompt = ai.definePrompt({
   Usage Frequency: {{{usageFrequency}}}
   Last Maintenance Date: {{{lastMaintenanceDate}}}
   Purchase Date: {{{purchaseDate}}}
-  Maintenance History: {{{maintenanceHistory}}}
+
+  {{#if maintenanceHistory}}
+  Maintenance History:
+  {{#each maintenanceHistory}}
+  - Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}
+  {{/each}}
+  {{/if}}
+
   {{#if location}}
   User's Location: {{{location}}}
   

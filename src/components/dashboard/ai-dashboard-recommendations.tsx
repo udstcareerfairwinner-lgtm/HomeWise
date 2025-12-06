@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -100,7 +101,7 @@ export function AiDashboardRecommendations() {
         usageFrequency: machine.usageFrequency,
         lastMaintenanceDate: machine.lastMaintenance,
         purchaseDate: machine.purchaseDate,
-        maintenanceHistory: machine.maintenanceHistory.map(h => `${h.date}: ${h.task} ($${h.cost})`).join(', ') || 'None',
+        maintenanceHistory: machine.maintenanceHistory.map(h => ({ task: h.task, date: h.date, cost: h.cost })),
         location,
       };
       const result = await runAiRecommendations(input);
