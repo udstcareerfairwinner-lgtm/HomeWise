@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Lightbulb, Sparkles, Wrench, ShieldCheck, Truck, Droplets, Wind, PlusCircle } from 'lucide-react';
+import { Lightbulb, Sparkles, Wrench, ShieldCheck, Truck, Droplets, Wind, PlusCircle, Bot } from 'lucide-react';
 import { AiChat } from '@/components/chat/ai-chat';
 import { machines } from '@/lib/data';
 import DashboardPage from '@/components/dashboard/dashboard-page';
@@ -123,7 +123,10 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <Card className="max-w-3xl mx-auto">
             <CardHeader className="text-center">
-              <CardTitle>Ask Our AI Assistant</CardTitle>
+              <CardTitle className="flex items-center justify-center gap-2">
+                <Bot className="h-6 w-6" />
+                Ask Our AI Assistant
+              </CardTitle>
               <CardDescription>
                 Have a question about appliance maintenance? Ask our AI assistant for tips, advice, or troubleshooting steps.
               </CardDescription>
