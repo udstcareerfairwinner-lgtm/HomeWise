@@ -39,7 +39,7 @@ Machine Information:
 - Last Service: {{{lastMaintenance}}}
 - Usage: {{{usageFrequency}}}
 {{#if maintenanceHistory}}
-- History: {{{maintenanceHistory}}}
+- History (JSON String): {{{maintenanceHistory}}}
 {{/if}}
 
 Your output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.`,

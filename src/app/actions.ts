@@ -28,6 +28,7 @@ export async function runPredictiveMaintenance(input: PredictiveMaintenanceInput
   try {
     const result = await predictMaintenance({
       ...validatedInput.data,
+      // @ts-ignore
       maintenanceHistory: JSON.stringify(validatedInput.data.maintenanceHistory),
     });
     return result;
@@ -52,6 +53,7 @@ export async function runAiRecommendations(
   try {
     const result = await getMaintenanceRecommendations({
       ...validatedInput.data,
+      // @ts-ignore
       maintenanceHistory: JSON.stringify(validatedInput.data.maintenanceHistory),
     });
     return result;

@@ -42,7 +42,7 @@ const prompt = ai.definePrompt({
   - Purchased: {{{purchaseDate}}}
   - Last Service: {{{lastMaintenanceDate}}}
   {{#if maintenanceHistory}}
-  - History: {{{maintenanceHistory}}}
+  - History (JSON String): {{{maintenanceHistory}}}
   {{/if}}
 
   {{#if location}}
@@ -65,7 +65,6 @@ const maintenanceRecommendationsFlow = ai.defineFlow(
   async input => {
     const { output } = await prompt.generate({
       input: input,
-      tools: [getGeolocationTool],
     });
     if (!output) {
       throw new Error('Unable to generate recommendations.');
