@@ -1,4 +1,3 @@
-
 'use server';
 
 /**
@@ -13,37 +12,28 @@ import {ai} from '@/ai/genkit';
 import {
     PredictiveMaintenanceInputSchema,
     PredictiveMaintenanceOutputSchema,
-    type PredictiveMaintenanceInput
+    type PredictiveMaintenanceInput,
+    type PredictiveMaintenanceOutput
 } from '@/ai/schemas';
 
-export { type PredictiveMaintenanceOutput } from '@/ai/schemas';
-export type { PredictiveMaintenanceInput };
+export type { PredictiveMaintenanceInput, PredictiveMaintenanceOutput };
 
 
 export async function predictMaintenance(input: PredictiveMaintenanceInput): Promise<PredictiveMaintenanceOutput> {
-  return await predictMaintenanceFlow(input);
+  const result = await predictMaintenanceFlow(input);
+  if (!result) {
+    throw new Error('No prediction result received from AI');
+  }
+  return result;
 }
+
+const promptTemplate = "You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance task, its due date, the estimated cost, and an urgency level (Low, Medium, or High).\n\nMachine Information:\n- Category: {{category}}\n- Brand: {{brand}}\n- Model: {{model}}\n- Purchased: {{purchaseDate}}\n- Warranty Expiry: {{warrantyExpiry}}\n- Last Service: {{lastMaintenance}}\n- Usage: {{usageFrequency}}\n{{#if maintenanceHistory}}\n- Maintenance History (JSON String): {{{maintenanceHistory}}}\n{{/if}}\n\nYour output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.";
 
 const prompt = ai.definePrompt({
   name: 'predictMaintenancePrompt',
   input: { schema: PredictiveMaintenanceInputSchema },
   output: { schema: PredictiveMaintenanceOutputSchema },
-  prompt: `You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance task, its due date, the estimated cost, and an urgency level (Low, Medium, or High).
-
-Machine Information:
-- Category: {{{category}}}
-- Brand: {{{brand}}}
-- Model: {{{model}}}
-- Purchased: {{{purchaseDate}}}
-- Warranty Expiry: {{{warrantyExpiry}}}
-- Last Service: {{{lastMaintenance}}}
-- Usage: {{{usageFrequency}}}
-{{#if maintenanceHistory}}
-- History (JSON String): {{{maintenanceHistory}}}
-{{/if}}
-
-Your output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.`,
-});
+}, promptTemplate);
 
 const predictMaintenanceFlow = ai.defineFlow(
   {
@@ -53,8 +43,12 @@ const predictMaintenanceFlow = ai.defineFlow(
   },
   async input => {
     const { output } = await prompt.generate({
-      input: input,
+      input: {
+        ...input,
+        maintenanceHistory: JSON.stringify(input.maintenanceHistory)
+      }
     });
+    
     if (!output) {
         throw new Error('Could not generate a prediction.');
     }
