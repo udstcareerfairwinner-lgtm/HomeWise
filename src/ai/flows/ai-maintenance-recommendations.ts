@@ -42,7 +42,7 @@ const prompt = ai.definePrompt({
   - Purchased: {{{purchaseDate}}}
   - Last Service: {{{lastMaintenanceDate}}}
   {{#if maintenanceHistory}}
-  - History: {{jsonStringify maintenanceHistory}}
+  - History: {{{maintenanceHistory}}}
   {{/if}}
 
   {{#if location}}
@@ -63,7 +63,12 @@ const maintenanceRecommendationsFlow = ai.defineFlow(
     outputSchema: MaintenanceRecommendationsOutputSchema,
   },
   async input => {
-    const { output } = await prompt.generate({ input });
+    const { output } = await prompt.generate({
+      input: {
+        ...input,
+        maintenanceHistory: JSON.stringify(input.maintenanceHistory),
+      },
+    });
     if (!output) {
       throw new Error('Unable to generate recommendations.');
     }

@@ -28,7 +28,6 @@ type PredictiveMaintenanceProps = {
   onPredict?: (prediction: Prediction) => void;
 };
 
-
 export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintenanceProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<Prediction | null>(null);
@@ -43,6 +42,7 @@ export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintena
   const handlePredict = async () => {
     setIsLoading(true);
     setPrediction(null);
+    
     try {
       const input = {
         category: machine.category,
@@ -52,21 +52,47 @@ export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintena
         purchaseDate: machine.purchaseDate,
         usageFrequency: machine.usageFrequency,
         warrantyExpiry: machine.warrantyExpiry,
-        maintenanceHistory: machine.maintenanceHistory.map(h => ({ task: h.task, date: h.date, cost: h.cost })),
+        maintenanceHistory: machine.maintenanceHistory.map(h => ({ 
+          task: h.task, 
+          date: h.date, 
+          cost: h.cost 
+        })),
       };
+      
       const result = await runPredictiveMaintenance(input);
-      setPrediction(result);
-      if (onPredict) {
-        onPredict(result); // Pass the prediction to the parent
+      
+      if (!result) {
+        throw new Error('No prediction received from AI');
       }
+
+      // Validate the prediction structure
+      if (!result.taskName || !result.nextMaintenanceDate || result.estimatedCost === undefined) {
+        throw new Error('Invalid prediction data received');
+      }
+      
+      setPrediction(result);
+      
+      // Call the callback if provided
+      if (onPredict) {
+        onPredict(result);
+      }
+
+      toast({
+        title: 'Prediction Generated',
+        description: `Next maintenance: ${result.taskName}`,
+      });
+      
     } catch (error) {
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Could not generate a maintenance prediction. Please try again.';
+      
       toast({
         variant: 'destructive',
         title: 'Prediction Failed',
-        description:
-          'Could not generate a maintenance prediction. Please try again.',
+        description: errorMessage,
       });
-      console.error(error);
+      console.error('Predictive Maintenance error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -90,21 +116,27 @@ export function PredictiveMaintenance({ machine, onPredict }: PredictiveMaintena
           </div>
         ) : prediction ? (
           <div className="space-y-3 text-sm">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-start">
               <span className="text-muted-foreground">Next Task:</span>
-              <span className="font-medium">{prediction.taskName}</span>
+              <span className="font-medium text-right flex-1 ml-4">
+                {prediction.taskName}
+              </span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <span className="text-muted-foreground">Due Date:</span>
               <span className="font-medium">{prediction.nextMaintenanceDate}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <span className="text-muted-foreground">Est. Cost:</span>
-              <span className="font-medium">${prediction.estimatedCost.toFixed(2)}</span>
+              <span className="font-medium">
+                ${typeof prediction.estimatedCost === 'number' 
+                  ? prediction.estimatedCost.toFixed(2) 
+                  : '0.00'}
+              </span>
             </div>
-             <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center">
               <span className="text-muted-foreground">Urgency:</span>
-              <Badge variant={urgencyVariant[prediction.urgencyLevel]}>
+              <Badge variant={urgencyVariant[prediction.urgencyLevel] || 'default'}>
                 {prediction.urgencyLevel}
               </Badge>
             </div>

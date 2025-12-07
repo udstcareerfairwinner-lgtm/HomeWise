@@ -15,6 +15,7 @@ import {
     PredictiveMaintenanceOutputSchema,
     type PredictiveMaintenanceInput
 } from '@/ai/schemas';
+import { z } from 'zod';
 
 export { type PredictiveMaintenanceOutput } from '@/ai/schemas';
 
@@ -37,7 +38,7 @@ Machine Information:
 - Last Service: {{{lastMaintenance}}}
 - Usage: {{{usageFrequency}}}
 {{#if maintenanceHistory}}
-- History: {{jsonStringify maintenanceHistory}}
+- History: {{{maintenanceHistory}}}
 {{/if}}
 
 Your output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.`,
@@ -50,7 +51,12 @@ const predictMaintenanceFlow = ai.defineFlow(
     outputSchema: PredictiveMaintenanceOutputSchema,
   },
   async input => {
-    const { output } = await prompt.generate({ input });
+    const { output } = await prompt.generate({
+      input: {
+        ...input,
+        maintenanceHistory: JSON.stringify(input.maintenanceHistory),
+      },
+    });
     if (!output) {
         throw new Error('Could not generate a prediction.');
     }
