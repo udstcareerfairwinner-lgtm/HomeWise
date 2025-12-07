@@ -20,20 +20,24 @@ import {
   History,
   Settings,
   CircleHelp,
-  Lightbulb
+  Lightbulb,
+  Bell
 } from 'lucide-react';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/machines', label: 'Machines', icon: Wrench },
   { href: '/predictions', label: 'Predictions', icon: Lightbulb },
-  { href: '/reminders', label: 'Reminders', icon: History },
+  { href: '/reminders', label: 'Reminders', icon: Bell },
   { href: '/history', label: 'History', icon: History },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const userAvatar = PlaceHolderImages.find(img => img.id === 'user-avatar');
+
 
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -52,7 +56,7 @@ export function AppSidebar() {
               <Link
                 href={item.href}
                 className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8 ${
-                  pathname === item.href
+                  pathname.startsWith(item.href)
                     ? 'bg-accent text-accent-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
@@ -81,11 +85,11 @@ export function AppSidebar() {
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
-              href="#"
+              href="/settings"
               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
             >
                 <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtYWxlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyODg3NjM2fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="John Doe" data-ai-hint="male portrait" />
+                    <AvatarImage src={userAvatar?.imageUrl} alt="John Doe" data-ai-hint={userAvatar?.imageHint} />
                     <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               <span className="sr-only">Account</span>

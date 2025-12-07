@@ -2,33 +2,39 @@
   "placeholderImages": [
     {
       "id": "car",
-      "description": "A modern sedan parked in a driveway.",
-      "imageUrl": "https://images.unsplash.com/photo-1722088354375-3c64b4d994b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzZWRhbiUyMGNhcnxlbnwwfHx8fDE3NjI4OTc2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "sedan car"
+      "description": "A modern white sedan on a city street.",
+      "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwb3JzY2hlfGVufDB8fHx8MTc2MzA3Mzg5NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "white car"
     },
     {
       "id": "refrigerator",
-      "description": "A stainless steel refrigerator in a kitchen.",
-      "imageUrl": "https://images.unsplash.com/photo-1740803292374-1b167c1558b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8a2l0Y2hlbiUyMGFwcGxpYW5jZXxlbnwwfHx8fDE3NjI4ODkyODZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "kitchen appliance"
+      "description": "A sleek, modern stainless steel refrigerator in a well-lit kitchen.",
+      "imageUrl": "https://images.unsplash.com/photo-1628531239846-957933f11370?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdGFpbmxlc3MlMjBzdGVlbCUyMHJlZnJpZ2VyYXRvcnxlbnwwfHx8fDE3NjMwNzQwNDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kitchen refrigerator"
     },
     {
       "id": "washing-machine",
-      "description": "A front-loading washing machine.",
-      "imageUrl": "https://images.unsplash.com/photo-1761403460807-a89b7de9b4d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsYXVuZHJ5JTIwYXBwbGlhbmNlfGVufDB8fHx8MTc2Mjk0NzA4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "laundry appliance"
+      "description": "A modern, white front-loading washing machine in a laundry room.",
+      "imageUrl": "https://images.unsplash.com/photo-1582735689369-4d2d69e8451f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3YXNoaW5nJTIwbWFjaGluZXxlbnwwfHx8fDE3NjMwNzQxMDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "washing machine"
     },
     {
       "id": "ac-unit",
-      "description": "An air conditioning unit mounted on a wall.",
-      "imageUrl": "https://images.unsplash.com/photo-1601993198415-19d86ae28424?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhaXIlMjBjb25kaXRpb25lcnxlbnwwfHx8fDE3NjI4NDU5MDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "air conditioner"
+      "description": "An outdoor air conditioning unit next to a house.",
+      "imageUrl": "https://images.unsplash.com/photo-1659938363838-8a8bce650b90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYyUyMHVuaXR8ZW58MHx8fHwxNzYzMDc0MTg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AC unit"
     },
     {
       "id": "bike",
-      "description": "A mountain bike on a trail.",
-      "imageUrl": "https://images.unsplash.com/photo-1604850613811-b50ad1aeeecd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtb3VudGFpbiUyMGJpa2V8ZW58MHx8fHwxNzYyOTQ3MDgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A person riding a mountain bike on a scenic trail.",
+      "imageUrl": "https://images.unsplash.com/photo-1576672843334-f8795039f3c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtb3VudGFpbiUyMGJpa2V8ZW58MHx8fHwxNzYzMDc0MjM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "mountain bike"
+    },
+    {
+      "id": "user-avatar",
+      "description": "Portrait of a person.",
+      "imageUrl": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhdmF0YXJ8ZW58MHx8fHwxNzYzMDc0MzM1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "user avatar"
     }
   ]
 }
