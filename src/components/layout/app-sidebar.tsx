@@ -21,7 +21,6 @@ import {
   Settings,
   CircleHelp,
   Bell,
-  AlertCircle,
   Lightbulb
 } from 'lucide-react';
 
@@ -30,7 +29,6 @@ const menuItems = [
   { href: '/machines', label: 'Machines', icon: Wrench },
   { href: '/predictions', label: 'Predictions', icon: Lightbulb },
   { href: '/reminders', label: 'Reminders', icon: Bell },
-  { href: '/notifications', label: 'Notifications', icon: AlertCircle },
   { href: '/history', label: 'History', icon: History },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
