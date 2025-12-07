@@ -1,9 +1,10 @@
+
 'use server';
 
 /**
  * @fileOverview Implements the predictive maintenance flow for household machines.
  *
- * - predictMaintenance - Predicts the next maintenance date and task for a given machine.
+ * - predictMaintenance - Predicts the next maintenance task for a given machine.
  * - PredictiveMaintenanceInput - The input type for the predictMaintenance function.
  * - PredictiveMaintenanceOutput - The return type for the predictMaintenance function.
  */
@@ -25,7 +26,21 @@ const prompt = ai.definePrompt({
   name: 'predictMaintenancePrompt',
   input: { schema: PredictiveMaintenanceInputSchema },
   output: { schema: PredictiveMaintenanceOutputSchema },
-  prompt: `You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance date and type of task required. Also, provide a recommended cost range for the task and urgency level (Low, Medium, High). Output in JSON format with fields: taskName, nextMaintenanceDate, estimatedCost, urgencyLevel.\n\nMachine Category: {{{category}}}\nBrand: {{{brand}}}\nModel: {{{model}}}\nLast Maintenance Date: {{{lastMaintenance}}}\nPurchase Date: {{{purchaseDate}}}\nUsage Frequency: {{{usageFrequency}}}\nWarranty Expiry: {{{warrantyExpiry}}}\n\n{{#if maintenanceHistory}}\nMaintenance History:\n{{#each maintenanceHistory}}\n- Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}\n{{/each}}\n{{/if}}`,
+  prompt: `You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance task, its due date, the estimated cost, and an urgency level (Low, Medium, or High).
+
+Machine Information:
+- Category: {{{category}}}
+- Brand: {{{brand}}}
+- Model: {{{model}}}
+- Purchased: {{{purchaseDate}}}
+- Warranty Expiry: {{{warrantyExpiry}}}
+- Last Service: {{{lastMaintenance}}}
+- Usage: {{{usageFrequency}}}
+{{#if maintenanceHistory}}
+- History: {{jsonStringify maintenanceHistory}}
+{{/if}}
+
+Your output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.`,
 });
 
 const predictMaintenanceFlow = ai.defineFlow(
@@ -36,6 +51,9 @@ const predictMaintenanceFlow = ai.defineFlow(
   },
   async input => {
     const { output } = await prompt(input);
-    return output!;
+    if (!output) {
+        throw new Error('Could not generate a prediction.');
+    }
+    return output;
   }
 );

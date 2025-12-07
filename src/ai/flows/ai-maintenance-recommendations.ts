@@ -33,29 +33,25 @@ const prompt = ai.definePrompt({
 
   Given the following information about a household machine, provide cost-saving tips, recommend service providers, estimate its remaining useful life, and highlight any critical attention needed.
 
-  Machine Type: {{{category}}}
-  Brand: {{{brand}}}
-  Model: {{{model}}}
-  Usage Frequency: {{{usageFrequency}}}
-  Last Maintenance Date: {{{lastMaintenanceDate}}}
-  Purchase Date: {{{purchaseDate}}}
-
+  Machine Information:
+  - Category: {{{category}}}
+  - Brand: {{{brand}}}
+  - Model: {{{model}}}
+  - Usage: {{{usageFrequency}}}
+  - Purchased: {{{purchaseDate}}}
+  - Last Service: {{{lastMaintenanceDate}}}
   {{#if maintenanceHistory}}
-  Maintenance History:
-  {{#each maintenanceHistory}}
-  - Task: {{{task}}}, Date: {{{date}}}, Cost: {{{cost}}}
-  {{/each}}
+  - History: {{jsonStringify maintenanceHistory}}
   {{/if}}
 
   {{#if location}}
-  The user has provided their location as: {{{location}}}.
-  
-  When recommending service providers, use the getGeolocationTool to find the coordinates for the user's location. Then, suggest specific, real service providers or types of service providers (like 'Toyota dealership' or 'certified auto repair shops') near that location. For non-vehicle machines, suggest general service types available in the area.
+  The user is located at: {{{location}}}.
+  Use the getGeolocationTool to find service providers near this location.
   {{else}}
-  No specific location was provided. When recommending service providers, please suggest generic options like "a local auto shop," or "a certified appliance repair service".
+  The user has not provided a location. Suggest generic service provider types.
   {{/if}}
 
-  Your response should be structured as a JSON object that strictly adheres to the output schema.
+  Provide your response in a JSON object adhering to the specified output schema.
 `,
 });
 
