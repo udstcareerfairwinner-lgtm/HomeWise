@@ -29,7 +29,7 @@ export const machines: Machine[] = [
         vendor: 'Tire Center'
       }
     ],
-    imageUrl: 'https://picsum.photos/seed/car-1/600/400',
+    imageUrl: 'https://images.unsplash.com/photo-1722088354375-3c64b4d994b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzZWRhbiUyMGNhcnxlbnwwfHx8fDE3NjI4OTc2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     imageHint: 'sedan car'
   },
   {
@@ -53,8 +53,8 @@ export const machines: Machine[] = [
             vendor: 'DIY'
         }
     ],
-    imageUrl: 'https://picsum.photos/seed/fridge-2/600/400',
-    imageHint: 'kitchen fridge'
+    imageUrl: 'https://images.unsplash.com/photo-1740803292374-1b167c1558b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8a2l0Y2hlbiUyMGFwcGxpYW5jZXxlbnwwfHx8fDE3NjI4ODkyODZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageHint: 'kitchen appliance'
   },
   {
     id: 'ac-789',
@@ -76,7 +76,7 @@ export const machines: Machine[] = [
         vendor: 'HVAC Services Inc.'
       }
     ],
-    imageUrl: 'https://picsum.photos/seed/ac-3/600/400',
+    imageUrl: 'https://images.unsplash.com/photo-1601993198415-19d86ae28424?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhaXIlMjBjb25kaXRpb25lcnxlbnwwfHx8fDE3NjI4NDU5MDR8MA&ixlib=rb-4.1.0&q=80&w=1080',
     imageHint: 'air conditioner'
   }
 ];

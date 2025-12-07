@@ -20,7 +20,6 @@ import {
   History,
   Settings,
   CircleHelp,
-  Bell,
   Lightbulb
 } from 'lucide-react';
 
@@ -28,7 +27,7 @@ const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/machines', label: 'Machines', icon: Wrench },
   { href: '/predictions', label: 'Predictions', icon: Lightbulb },
-  { href: '/reminders', label: 'Reminders', icon: Bell },
+  { href: '/reminders', label: 'Reminders', icon: History },
   { href: '/history', label: 'History', icon: History },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
@@ -86,7 +85,7 @@ export function AppSidebar() {
               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
             >
                 <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://picsum.photos/seed/user/100/100" alt="John Doe" />
+                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtYWxlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyODg3NjM2fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="John Doe" data-ai-hint="male portrait" />
                     <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               <span className="sr-only">Account</span>
