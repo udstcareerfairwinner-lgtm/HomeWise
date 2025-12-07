@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -42,11 +43,9 @@ const predictMaintenanceFlow = ai.defineFlow(
     outputSchema: PredictiveMaintenanceOutputSchema,
   },
   async input => {
-    const { output } = await prompt.generate({
-      input: {
+    const { output } = await prompt({
         ...input,
         maintenanceHistory: JSON.stringify(input.maintenanceHistory)
-      }
     });
     
     if (!output) {
