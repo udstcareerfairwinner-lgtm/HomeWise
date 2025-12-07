@@ -64,10 +64,8 @@ const maintenanceRecommendationsFlow = ai.defineFlow(
   },
   async input => {
     const { output } = await prompt.generate({
-      input: {
-        ...input,
-        maintenanceHistory: JSON.stringify(input.maintenanceHistory),
-      },
+      input: input,
+      tools: [getGeolocationTool],
     });
     if (!output) {
       throw new Error('Unable to generate recommendations.');

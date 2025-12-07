@@ -53,10 +53,7 @@ const predictMaintenanceFlow = ai.defineFlow(
   },
   async input => {
     const { output } = await prompt.generate({
-      input: {
-        ...input,
-        maintenanceHistory: JSON.stringify(input.maintenanceHistory),
-      },
+      input: input,
     });
     if (!output) {
         throw new Error('Could not generate a prediction.');

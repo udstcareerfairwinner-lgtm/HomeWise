@@ -1,3 +1,4 @@
+
 'use server';
 
 import {
@@ -25,7 +26,10 @@ export async function runPredictiveMaintenance(input: PredictiveMaintenanceInput
     throw new Error('Invalid input for predictive maintenance.');
   }
   try {
-    const result = await predictMaintenance(validatedInput.data);
+    const result = await predictMaintenance({
+      ...validatedInput.data,
+      maintenanceHistory: JSON.stringify(validatedInput.data.maintenanceHistory),
+    });
     return result;
   } catch (error) {
     console.error('Error in runPredictiveMaintenance:', error);
@@ -46,7 +50,10 @@ export async function runAiRecommendations(
     throw new Error('Invalid input for AI recommendations.');
   }
   try {
-    const result = await getMaintenanceRecommendations(validatedInput.data);
+    const result = await getMaintenanceRecommendations({
+      ...validatedInput.data,
+      maintenanceHistory: JSON.stringify(validatedInput.data.maintenanceHistory),
+    });
     return result;
   } catch (error) {
     console.error('Error in runAiRecommendations:', error);
