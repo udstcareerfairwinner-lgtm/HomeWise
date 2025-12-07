@@ -15,12 +15,13 @@ import {
     PredictiveMaintenanceOutputSchema,
     type PredictiveMaintenanceInput
 } from '@/ai/schemas';
-import { z } from 'zod';
 
 export { type PredictiveMaintenanceOutput } from '@/ai/schemas';
+export type { PredictiveMaintenanceInput };
+
 
 export async function predictMaintenance(input: PredictiveMaintenanceInput): Promise<PredictiveMaintenanceOutput> {
-  return predictMaintenanceFlow(input);
+  return await predictMaintenanceFlow(input);
 }
 
 const prompt = ai.definePrompt({
