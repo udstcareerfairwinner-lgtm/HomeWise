@@ -10,6 +10,7 @@
  */
 
 import {ai} from '@/ai/genkit';
+import {googleAI} from '@genkit-ai/google-genai';
 import {
     PredictiveMaintenanceInputSchema,
     PredictiveMaintenanceOutputSchema,
@@ -34,6 +35,7 @@ const prompt = ai.definePrompt({
   name: 'predictMaintenancePrompt',
   input: { schema: PredictiveMaintenanceInputSchema },
   output: { schema: PredictiveMaintenanceOutputSchema },
+  model: googleAI.model('gemini-1.5-flash'),
 }, promptTemplate);
 
 const predictMaintenanceFlow = ai.defineFlow(
