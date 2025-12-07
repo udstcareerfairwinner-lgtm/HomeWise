@@ -50,7 +50,7 @@ const predictMaintenanceFlow = ai.defineFlow(
     outputSchema: PredictiveMaintenanceOutputSchema,
   },
   async input => {
-    const { output } = await prompt(input);
+    const { output } = await prompt.generate({ input });
     if (!output) {
         throw new Error('Could not generate a prediction.');
     }
