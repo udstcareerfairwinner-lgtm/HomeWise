@@ -1,4 +1,3 @@
-
 'use server';
 
 /**
@@ -20,16 +19,21 @@ import {
 
 export type { PredictiveMaintenanceInput, PredictiveMaintenanceOutput };
 
+const promptTemplate = `You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance task, its due date, the estimated cost, and an urgency level (Low, Medium, or High).
 
-export async function predictMaintenance(input: PredictiveMaintenanceInput): Promise<PredictiveMaintenanceOutput> {
-  const result = await predictMaintenanceFlow(input);
-  if (!result) {
-    throw new Error('No prediction result received from AI');
-  }
-  return result;
-}
+Machine Information:
+- Category: {{category}}
+- Brand: {{brand}}
+- Model: {{model}}
+- Purchased: {{purchaseDate}}
+- Warranty Expiry: {{warrantyExpiry}}
+- Last Service: {{lastMaintenance}}
+- Usage: {{usageFrequency}}
+{{#if maintenanceHistory}}
+- Maintenance History (JSON String): {{{maintenanceHistory}}}
+{{/if}}
 
-const promptTemplate = "You are an AI assistant for the Homewise app. Given the following information about a household machine, predict the next maintenance task, its due date, the estimated cost, and an urgency level (Low, Medium, or High).\n\nMachine Information:\n- Category: {{category}}\n- Brand: {{brand}}\n- Model: {{model}}\n- Purchased: {{purchaseDate}}\n- Warranty Expiry: {{warrantyExpiry}}\n- Last Service: {{lastMaintenance}}\n- Usage: {{usageFrequency}}\n{{#if maintenanceHistory}}\n- Maintenance History (JSON String): {{{maintenanceHistory}}}\n{{/if}}\n\nYour output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.";
+Your output must be a JSON object with the fields: taskName, nextMaintenanceDate, estimatedCost, and urgencyLevel.`;
 
 const prompt = ai.definePrompt({
   name: 'predictMaintenancePrompt',
@@ -47,8 +51,8 @@ const predictMaintenanceFlow = ai.defineFlow(
   async input => {
     const { output } = await prompt({
         ...input,
-        maintenanceHistory: JSON.stringify(input.maintenanceHistory)
-    });
+        maintenanceHistory: input.maintenanceHistory ? JSON.stringify(input.maintenanceHistory) : undefined
+    } as any); // Type assertion needed due to schema mismatch between flow input and prompt rendering
     
     if (!output) {
         throw new Error('Could not generate a prediction.');
@@ -56,3 +60,11 @@ const predictMaintenanceFlow = ai.defineFlow(
     return output;
   }
 );
+
+export async function predictMaintenance(input: PredictiveMaintenanceInput): Promise<PredictiveMaintenanceOutput> {
+  const result = await predictMaintenanceFlow(input);
+  if (!result) {
+    throw new Error('No prediction result received from AI');
+  }
+  return result;
+}
