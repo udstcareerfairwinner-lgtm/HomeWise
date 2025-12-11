@@ -25,12 +25,22 @@ import {
   WashingMachine,
   AirVent,
   Wrench,
+  Bot,
 } from 'lucide-react';
 import { CostSummaryChart } from '@/components/dashboard/cost-summary-chart';
 import { machines, maintenanceTasks } from '@/lib/data';
 import type { Machine } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { WarrantyStatus } from '@/components/dashboard/warranty-status';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { AiChat } from '../chat/ai-chat';
 
 const getMachineIcon = (category: Machine['category']) => {
   switch (category) {
@@ -70,7 +80,8 @@ export default function DashboardPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="lg:col-span-3">
+      <div className="lg:col-span-3 grid gap-6">
+        <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="space-y-1.5">
                 <CardTitle className="flex items-center gap-2">
@@ -117,7 +128,7 @@ export default function DashboardPage() {
               </Table>
             </CardContent>
         </Card>
-      
+      </div>
         <Card>
             <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -180,6 +191,34 @@ export default function DashboardPage() {
         </Card>
         
         <WarrantyStatus />
+
+        <Dialog>
+            <DialogTrigger asChild>
+              <Card className="lg:col-span-3 text-center p-8 cursor-pointer hover:bg-card/80 transition-colors shadow-lg hover:shadow-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-center gap-2 text-2xl">
+                    <Bot className="h-8 w-8" />
+                    Ask Our AI Assistant
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    Click here to start a conversation about appliance maintenance, troubleshooting, or anything else.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2">
+                    <Bot />
+                    AI Assistant
+                    </DialogTitle>
+                    <DialogDescription>
+                    Ask any question about home appliance maintenance.
+                    </DialogDescription>
+                </DialogHeader>
+                <AiChat />
+            </DialogContent>
+        </Dialog>
     </div>
   );
 }
