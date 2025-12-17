@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -11,7 +12,7 @@ import {
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
 import { Home, PanelLeft, Settings, Wrench, History, Bell, Lightbulb } from 'lucide-react';
 
@@ -45,14 +46,18 @@ export function AppHeader() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="sm:max-w-xs">
-              <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="/"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                >
-                  <Wrench className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Homewise</span>
-                </Link>
+             <SheetHeader>
+                <SheetTitle>
+                    <Link
+                    href="/"
+                    className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                    >
+                    <Wrench className="h-5 w-5 transition-all group-hover:scale-110" />
+                    <span className="sr-only">Homewise</span>
+                    </Link>
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="grid gap-6 text-lg font-medium mt-4">
                 {mobileMenuItems.map(item => (
                     <Link
                         key={item.label}
