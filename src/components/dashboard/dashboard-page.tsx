@@ -79,8 +79,9 @@ export default function DashboardPage() {
     
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <div className="lg:col-span-3 grid gap-6">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {/* Full-width row for upcoming tasks */}
+      <div className="lg:col-span-3">
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="space-y-1.5">
@@ -129,6 +130,8 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
       </div>
+
+      {/* Three-column section for summaries */}
         <Card>
             <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -175,7 +178,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
 
-        <Card className="lg:col-span-1">
+        <Card>
             <CardHeader>
             <CardTitle className="flex items-center gap-2">
                 <CircleDollarSign className="h-5 w-5" />
@@ -192,9 +195,11 @@ export default function DashboardPage() {
         
         <WarrantyStatus />
 
+      {/* Full-width row for AI Chat */}
+      <div className="lg:col-span-3">
         <Dialog>
             <DialogTrigger asChild>
-              <Card className="lg:col-span-3 text-center p-8 cursor-pointer hover:bg-card/80 transition-colors shadow-lg hover:shadow-primary/20">
+              <Card className="text-center p-8 cursor-pointer hover:bg-card/80 transition-colors shadow-lg hover:shadow-primary/20">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-center gap-2 text-2xl">
                     <Bot className="h-8 w-8" />
@@ -219,6 +224,7 @@ export default function DashboardPage() {
                 <AiChat />
             </DialogContent>
         </Dialog>
+      </div>
     </div>
   );
 }
