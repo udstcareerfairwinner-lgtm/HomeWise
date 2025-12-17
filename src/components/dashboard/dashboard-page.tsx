@@ -7,14 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import {
   Calendar,
@@ -95,38 +87,66 @@ export default function DashboardPage() {
               </div>
             </CardHeader>
             <CardContent>
-               <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[30%]">Machine</TableHead>
-                    <TableHead className="w-[40%]">Task</TableHead>
-                    <TableHead className="hidden md:table-cell w-[20%]">Due Date</TableHead>
-                    <TableHead className="text-right w-[10%]">Urgency</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {upcomingTasks.map((task) => {
-                    const machine = machines.find((m) => m.id === task.machineId);
-                    return (
-                      <TableRow key={task.id}>
-                        <TableCell className="font-medium truncate">
-                          {machine?.name || 'N/A'}
-                        </TableCell>
-                        <TableCell className="truncate">{task.taskName}</TableCell>
-                        <TableCell className="hidden md:table-cell">{task.dueDate}</TableCell>
-                        <TableCell className="text-right">
-                          <Badge
-                            variant={urgencyVariant[task.urgencyLevel]}
-                            className="w-[68px] justify-center"
-                          >
-                            {task.urgencyLevel}
-                          </Badge>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+              <div className="hidden md:block">
+                <div className="relative w-full overflow-auto">
+                    <table className="w-full caption-bottom text-sm">
+                        <thead className="[&_tr]:border-b">
+                        <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[30%]">Machine</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[40%]">Task</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 w-[20%]">Due Date</th>
+                            <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 text-right w-[10%]">Urgency</th>
+                        </tr>
+                        </thead>
+                        <tbody className="[&_tr:last-child]:border-0">
+                        {upcomingTasks.map((task) => {
+                            const machine = machines.find((m) => m.id === task.machineId);
+                            return (
+                            <tr key={task.id} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                                <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-medium truncate">
+                                {machine?.name || 'N/A'}
+                                </td>
+                                <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 truncate">{task.taskName}</td>
+                                <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">{task.dueDate}</td>
+                                <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-right">
+                                <Badge
+                                    variant={urgencyVariant[task.urgencyLevel]}
+                                    className="w-[68px] justify-center"
+                                >
+                                    {task.urgencyLevel}
+                                </Badge>
+                                </td>
+                            </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+
+               <div className="grid gap-4 md:hidden">
+                {upcomingTasks.length > 0 ? (
+                    upcomingTasks.map((task) => {
+                         const machine = machines.find((m) => m.id === task.machineId);
+                         return (
+                            <div key={task.id} className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 space-y-3">
+                                <div className="flex justify-between items-start">
+                                    <div>
+                                        <p className="font-semibold">{task.taskName}</p>
+                                        <p className="text-sm text-muted-foreground">{machine?.name || 'N/A'}</p>
+                                    </div>
+                                    <Badge variant={urgencyVariant[task.urgencyLevel]} className="shrink-0">{task.urgencyLevel}</Badge>
+                                </div>
+                                <div className="text-sm text-muted-foreground">
+                                    Due: {task.dueDate}
+                                </div>
+                            </div>
+                         )
+                    })
+                ) : (
+                  <p className="text-center text-muted-foreground">No upcoming tasks.</p>
+                )}
+              </div>
             </CardContent>
         </Card>
       </div>
