@@ -54,12 +54,12 @@ export function AppHeader() {
              <SheetHeader>
                 <SheetTitle>
                     <Link
-                    href="/"
-                    onClick={handleLinkClick}
-                    className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                        href="/"
+                        onClick={handleLinkClick}
+                        className="flex items-center gap-2 text-lg font-semibold"
                     >
-                    <Wrench className="h-5 w-5 transition-all group-hover:scale-110" />
-                    <span className="sr-only">Homewise</span>
+                        <Wrench className="h-6 w-6 text-primary" />
+                        <span>Homewise</span>
                     </Link>
                 </SheetTitle>
               </SheetHeader>
