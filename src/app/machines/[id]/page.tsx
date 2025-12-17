@@ -110,36 +110,60 @@ export default function MachineDetailPage({ params }: { params: { id: string } }
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Task</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Vendor</TableHead>
-                <TableHead className="text-right">Cost</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {machine.maintenanceHistory.length > 0 ? (
-                machine.maintenanceHistory.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell className="font-medium">{item.task}</TableCell>
-                    <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.vendor || 'DIY'}</TableCell>
-                    <TableCell className="text-right">
-                      ${item.cost.toFixed(2)}
-                    </TableCell>
+           <div className="hidden md:block">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Task</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Vendor</TableHead>
+                    <TableHead className="text-right">Cost</TableHead>
                   </TableRow>
-                ))
+                </TableHeader>
+                <TableBody>
+                  {machine.maintenanceHistory.length > 0 ? (
+                    machine.maintenanceHistory.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell className="font-medium">{item.task}</TableCell>
+                        <TableCell>{item.date}</TableCell>
+                        <TableCell>{item.vendor || 'DIY'}</TableCell>
+                        <TableCell className="text-right">
+                          ${item.cost.toFixed(2)}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={4} className="h-24 text-center">
+                        No maintenance history found.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+           </div>
+           <div className="grid gap-4 md:hidden">
+              {machine.maintenanceHistory.length > 0 ? (
+                  machine.maintenanceHistory.map((item) => (
+                      <div key={item.id} className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 space-y-3">
+                          <div className="flex justify-between items-start">
+                              <p className="font-semibold">{item.task}</p>
+                              <p className="text-sm font-medium">${item.cost.toFixed(2)}</p>
+                          </div>
+                          <div className="text-sm text-muted-foreground space-y-1">
+                              <p>Date: {item.date}</p>
+                              <p>Vendor: {item.vendor || 'DIY'}</p>
+                          </div>
+                      </div>
+                  ))
               ) : (
-                <TableRow>
-                  <TableCell colSpan={4} className="h-24 text-center">
-                    No maintenance history found.
-                  </TableCell>
-                </TableRow>
+                  <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm h-32">
+                    <p className="text-center text-muted-foreground">
+                      No maintenance history found.
+                    </p>
+                  </div>
               )}
-            </TableBody>
-          </Table>
+           </div>
         </CardContent>
       </Card>
     </div>
